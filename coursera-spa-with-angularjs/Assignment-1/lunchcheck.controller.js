@@ -5,18 +5,18 @@
         .module('LunchCheck')
         .controller('LunchCheckController', LunchCheckController);
 
-        LunchCheckController.$inject = ['$location']; 
+        LunchCheckController.$inject = []; 
 
-    function LunchCheckController($location) {
-        /* jshint validthis:true */
-        var vm = this;
+    function LunchCheckController() {
+        
+        let vm = this;
         vm.checkDishes = function () {
-            var num = countDishes(vm.dishes);
+            let num = countDishes(vm.dishes);
             vm.message = buildMessage(num);
           };
         
           function countDishes(dishes) {
-            var count = 0;
+            let count = 0;
             if (dishes) {
               var array = dishes.split(',');
               for (var idx in array) {
