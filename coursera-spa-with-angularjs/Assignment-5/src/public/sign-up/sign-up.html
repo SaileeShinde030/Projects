@@ -49,7 +49,7 @@
       <br>
 
       <button class="btn btn-default sign-up-submit"
-        ng-disabled="signUpForm.$invalid || signUpCtrl.shortNames.indexOf(signUpCtrl.user.favourite.toLowerCase()) === -1"
+        ng-disabled="signUpForm.$invalid"
         ng-click="signUpCtrl.submit()">Submit</button>
 
     </form>

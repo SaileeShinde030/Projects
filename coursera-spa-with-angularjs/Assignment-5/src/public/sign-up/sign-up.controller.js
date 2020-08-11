@@ -10,12 +10,12 @@ function SignUpController(MenuService, SignUpDataService, menuItems) {
   var $ctrl = this;
   var shortNames = [];
   for (var i = 0; i < menuItems.menu_items.length; i++) {
-    shortNames.push(menuItems.menu_items[i].short_name.toLowerCase() + "");
+      shortNames.push(menuItems.menu_items[i].short_name.toUpperCase() + "");
   }
   
   $ctrl.validateFavourite = function() {
     if ($ctrl.user != undefined && $ctrl.user.favourite != undefined) {
-      var favourite = $ctrl.user.favourite.toLowerCase();
+      var favourite = $ctrl.user.favourite.toUpperCase();
       if (shortNames.indexOf(favourite) != -1) {
         $ctrl.invalidDish = false;
       } else {

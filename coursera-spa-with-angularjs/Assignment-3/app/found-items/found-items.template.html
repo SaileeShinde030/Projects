@@ -13,4 +13,7 @@
   </li>
 </ul>
 
+<div ng-if="foundCtrl.isBeforeSearch()" class="message">Please input search term above and click NARROW IT DOWN FOR ME!</div>
+<div ng-if="foundCtrl.isNothingFound()" class="message">Nothing found.</div>
+
 <div ng-if="message.length > 0" class="alert alert-danger" role="alert">{{ message }}</div>

@@ -12,22 +12,24 @@
         let vm = this;
         vm.searchTerm = '';
         vm.message = '';
-        vm.foundItems = {};
-
-
-        vm.searchMenuItem = function () {
-           
-            vm.message = '';
-       
+        vm.foundItems = [];
+        vm.message = 'Please input search term above and click NARROW IT DOWN FOR ME!';
+ 
+        vm.searchMenuItem = function () {          
+            vm.message = '';      
             if (vm.searchTerm != '') {
                 vm.loading = true;
                 MenuSearchFactory.MenuSearch().then((resp) => {
                     vm.loading = false; 
-                    let menu = resp.data.menu_items;
-                    vm.foundItems = menu.filter(function (item) {                       
-                        return item.description.indexOf(vm.searchTerm) !== -1;
-                    });
-                  
+                    let allItems = resp.data.menu_items;
+                    vm.foundItems = [];
+                    for (var index = 0; index < allItems.length; ++index) {
+                      if (allItems[index].description.toLowerCase().indexOf(vm.searchTerm.toLowerCase()) >= 0) {
+                        vm.foundItems.push(allItems[index]);
+                      }
+                    }
+                    
+
                     if (vm.foundItems.length == 0) {
                         vm.loading = false;
                         vm.message = 'Nothing found!';
@@ -47,11 +49,12 @@
 
             }
             else {
-                vm.foundItems ={};
+                vm.foundItems =[];
                 vm.message = 'Nothing found!';
             }
 
         };
+
         vm.removeMenuItem = function(index){
             vm.foundItems.splice(index, 1);
         };

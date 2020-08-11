@@ -30,23 +30,5 @@ describe('menuservice', function () {
     $httpBackend.flush();
   });
 
-  it('should find menu item by name A1', function() {
-    $httpBackend.whenGET(ApiPath + '/menu_items/A1.json').respond(['Won Ton Soup with Chicken']);
-    menuservice.getMenuItemByShortName('A1').then(function(response) {
-      expect(response).toEqual(['Won Ton Soup with Chicken']);
-    });
-    $httpBackend.flush();
-  });
-
-    it('should report error when query menu item by name X1', function() {
-    $httpBackend.whenGET(ApiPath + '/menu_items/X1.json').respond(500);
-    menuservice.getMenuItemByShortName('X1').then(
-      function(response) {
-      }, 
-      function error(error) {
-        expect(error.status).toEqual(500);
-    });
-    $httpBackend.flush();
-  });
-
+ 
 });

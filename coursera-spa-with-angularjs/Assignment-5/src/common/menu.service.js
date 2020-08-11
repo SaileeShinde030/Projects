@@ -27,13 +27,27 @@ function MenuService($http, ApiPath) {
     });
   };
 
-  service.getMenuItemByShortName = function (shortName) {
-    if (shortName) {
-      return $http.get(ApiPath + "/menu_items/" + shortName.toUpperCase() + ".json").then(function (response) {
-        return response.data;
-      });
-    }
-  }
+  service.getMenuItemByShortName = function(shortName) {
+    
+    return $http({
+      method: "GET",
+      url: (ApiPath + "/menu_items.json")
+    }).then(function(result) {
+      var allItems = result.data.menu_items;
+      let foundItems = {};
+      for (var index = 0; index < allItems.length; ++index) {
+        if (allItems[index].short_name.toUpperCase().indexOf(shortName.toUpperCase()) >= 0) {
+          if(allItems[index].short_name.toUpperCase() === shortName){
+          foundItems = allItems[index];}
+        }
+      }
+      return foundItems;
+    });
+  };
+
+
+  
+  
 
 }
 
