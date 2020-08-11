@@ -13,9 +13,6 @@ describe('The MenuController', function() {
     "phone": "7738539220"
     }];
   
-    /**
-     * Gets called before each unit test it()
-     */
     beforeEach(function() {
       // Load module
       module('public');
@@ -24,13 +21,11 @@ describe('The MenuController', function() {
       inject(function ($injector) {
         var $controller = $injector.get('$controller');
         var myInfoData = $injector.get('SignUpDataService');
-        
+        var data = myInfoData.setUserPref(myInfo);
 
         // Instantiate controller
-        myInfoController = $controller('MyInfoController', {   
-        
-          MyInfoController:myInfo,
-        
+        myInfoController = $controller('MyInfoController', {           
+        MyInfoController:myInfo,
         ApiPath:"https://www.davidchuschinabistro.com/"
         });
       });
@@ -38,6 +33,7 @@ describe('The MenuController', function() {
   
     it('should initialize with SignUpData', function() {
       expect(myInfoController).toBeDefined();
+      expect(myInfoController.userPref).toEqual(myInfo);
       expect(myInfoController.basePath).toEqual(ApiPath);
     });
   
